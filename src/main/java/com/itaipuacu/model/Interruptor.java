@@ -1,4 +1,4 @@
-package com.event.model;
+package com.itaipuacu.model;
 
 public class Interruptor {
 	
