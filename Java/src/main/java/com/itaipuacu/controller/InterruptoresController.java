@@ -25,9 +25,8 @@ public class InterruptoresController {
 		return "redirect:/?"+Interruptor.botao;
 	}
 	
-	@RequestMapping("/botaoBombaCasa/{conn}")
-	public ResponseEntity<Object> botaoBombaCasa(@PathVariable("conn") String conn) {
-		System.out.println(conn);
+	@RequestMapping("/botaoBombaCasa/")
+	public ResponseEntity<Object> botaoBombaCasa() {
 		return new ResponseEntity<Object>(Interruptor.botao.toString(), HttpStatus.OK);
 	}
 }

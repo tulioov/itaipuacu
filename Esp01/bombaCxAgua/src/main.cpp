@@ -5,7 +5,7 @@
 const char* SSID = "SystemCall"; 
 const char* PASSWORD = "SAV1949sav"; 
 
-String BASE_URL = "http://192.168.0.14:8080/";
+String BASE_URL = "http://192.168.100.143:8080/";
 
 WiFiClient client;
 HTTPClient http;
@@ -49,7 +49,8 @@ void initWiFi() {
 
 void setup() {
   Serial.begin(9600);
-  pinMode(0, OUTPUT); 
+  pinMode(0, OUTPUT);
+  digitalWrite(0, HIGH);
   initWiFi();
 }
 
@@ -57,15 +58,14 @@ void setup() {
 
 void loop() {
 
-  Serial.println("[POST] /sensors - sending request... resposta:");
-  String conn = "Estou%20conectado"; 
+  Serial.println("[GET] /sensors - sending request... resposta:");
 
   if(httpRequest("/botaoBombaCasa/"+conn) == "1"){
     Serial.println("ligando");
-    digitalWrite(0, HIGH);
+    digitalWrite(0, LOW);
   }else{
     Serial.println("desligando");
-    digitalWrite(0, LOW);
+    digitalWrite(0, HIGH);
   }
 
   Serial.println("");
