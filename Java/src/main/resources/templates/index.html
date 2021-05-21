@@ -1,16 +1,41 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Home</title>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="../css/bootstrap.css">
+	<link rel="stylesheet" href="../css/jquery.dynameter.css">
+	<link rel="stylesheet" href="home/homeStyle.css">
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+
+	<title>Home</title>
 </head>
 <body>
+	<div class="container-fluid">
+		<form action="/ligaDesliga" method="post">
+			
+				<div class="row">
+					<div class="col-12 justify-center">
+						<div id="gaugeCxCasa"></div>
+					</div>
+					<div class="col-12">
+						<button class="btn-lg btn-primary btn-block" type="submit">
+							Bomba Casa <span class="off">OFF</span>
+						</button>
+					</div>
+					
+				</div>
+		</form>
+	</div>
+	
 
-	<form action="/ligaDesliga" method="post">
-		<button style="height: 200px; width: 200px;" type="submit">Ligar&Desligar</button>
-	</form>
-
-
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+	<script src="../js/jquery-3.4.0.min.js"></script>
+	<script src="../js/jquery.dynameter.js"></script>
+	<script src="../js/bootstrap.bundle.min.js"></script>
+	<script src="../home/homeController.js"></script>
 </body>
 </html>
