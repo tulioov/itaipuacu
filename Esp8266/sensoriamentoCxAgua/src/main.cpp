@@ -1,9 +1,15 @@
 #include <Arduino.h>
 #include <esp8266wifi.h>
-#include <esp8266httpclient.h>
+#include <ESP8266HTTPClient.h>
 
 const char *SSID = "SystemCall";
 const char *PASSWORD = "SAV1949sav";
+
+const int trigP = 2; //D4 Or GPIO-2 of nodemcu
+const int echoP = 0; //D3 Or GPIO-0 of nodemcu
+
+long duration;
+int distance;
 
 String BASE_URL = "http://192.168.100.143:8080/";
 
@@ -53,8 +59,8 @@ void initWiFi()
 void setup()
 {
   Serial.begin(9600);
-  pinMode(D1, INPUT);
-  pinMode(D4, INPUT);
+  pinMode(trigP, OUTPUT); // Sets the trigPin as an Output
+  pinMode(echoP, INPUT);  // Sets the echoPin as an Input
   initWiFi();
 }
 
@@ -63,15 +69,17 @@ void setup()
 void loop()
 {
 
-  if (digitalRead(D1) == 1)
-  {
-    Serial.println("liga Bomba");
-    httpRequest("/ligaDesliga/"){
-  }
-  if (digitalRead(D4) == 1)
-  {
-    Serial.println("Desliga Bomba");
-     httpRequest("/ligaDesliga/"){
-  }
-  delay(1500);
+  digitalWrite(trigP, LOW); // Makes trigPin low
+  delayMicroseconds(2);     // 2 micro second delay
+
+  digitalWrite(trigP, HIGH); // tigPin high
+  delayMicroseconds(10);     // trigPin high for 10 micro seconds
+  digitalWrite(trigP, LOW);  // trigPin low
+  
+  duration = pulseIn(echoP, HIGH); //Read echo pin, time in microseconds
+  distance = duration * 0.034 / 2; //Calculating actual/real distance
+
+  Serial.print("Distance = "); //Output distance on arduino serial monitor
+  Serial.println(distance);
+  delay(3000); //Pause for 3 seconds and start measuring distance again
 }
