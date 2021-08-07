@@ -4,8 +4,8 @@ var gaugeCxCasa;
 
 new DG.OnOffSwitch({
 	
-	    el:'#on-off-switch',
-	    height: 60,
+	    el:'#on-off-switch-bbcxcasa',
+	    height: 80,
 	    trackColorOn:'#F57C00',
 	    trackColorOff:'#666',
 	    trackBorderColor:'#555',
@@ -16,6 +16,21 @@ new DG.OnOffSwitch({
 	    	ligarDesligar(checked);
         }
 	});
+
+new DG.OnOffSwitch({
+	
+    el:'#on-off-switch-auto-bbcxcasa',
+    height: 80,
+    trackColorOn:'#007fff ',
+    trackColorOff:'#666',
+    trackBorderColor:'#555',
+    textColorOff:'#fff',
+    textOn:'BB AUTO ON',
+    textOff:'BB AUTO OFF',
+    listener:function(name, checked){
+    	ligarDesligar(checked);
+    }
+});
 
 
 
@@ -66,12 +81,12 @@ function getStatus(){
 		type : 'get'
 	})
 	.done(function(data){
-		if(data && !$("#on-off-switch").prop('checked')){
-			$("#on-off-switch").click();
+		if(data && !$("#on-off-switch-bbcxcasa").prop('checked')){
+			$("#on-off-switch-bbcxcasa").click();
 			return;
 		}
-		if(!data && $("#on-off-switch").prop('checked')){
-			$("#on-off-switch").click();
+		if(!data && $("#on-off-switch-bbcxcasa").prop('checked')){
+			$("#on-off-switch-bbcxcasa").click();
 			return;
 		}
 	})
