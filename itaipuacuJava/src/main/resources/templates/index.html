@@ -14,32 +14,88 @@
 	
 	<title>Home</title>
 </head>
-<body>
+<body style="background-color: black;">
 	<div class="container-fluid">
-		<div class="row">
-			<div class="col-6 justify-center">
-				<div id="gaugeCxCasa"></div>
-			</div>
-			<div class="col-12 mt-4">
-				<input type="checkbox" id="on-off-switch-bbcxcasa" name="switch1">
-			</div>
-			<div class="col-12 mt-4">
-				<input type="checkbox" id="on-off-switch-auto-bbcxcasa" name="switch2">
+		
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col-12 justify-center"> -->
+<!-- 				<div id="gaugeCxCisterna"></div> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-12 justify-center"> -->
+<!-- 				<div id="gaugeCxCisternalabel"></div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+		<div class="col-md-12"> 
+			<div class="list-content">
+		        <a href="#DD01" data-toggle="collapse" aria-expanded="false" aria-controls="DD01" class="collapsed btn btn-success col-md-12 mt-4">
+		        	Caixa D'água
+	        		<i class="fa fa-chevron-down"></i>
+	        	</a>
+	        	
+	        	<div class="collapse" id="DD01" aria-expanded="false" style="height: 0px;">
+		            <div class="list-box">
+		                <div class="row">
+		                    <div class="col-md-12">
+		                        <div class="row">
+			                        <div class="row">
+										<div class="col-6">
+											<div id="gaugeCxCasaId" class="gauge-container"></div>
+											<h3 class="ml-4" style="color: aliceblue;">Cx agua</h3>
+										</div>
+										<div class="col-6">
+											<div id="gaugeCxCisternaId" class="gauge-container"></div>
+											<h3 class="ml-4" style="color: aliceblue;">Cisterna</h3>
+										</div>
+									</div>
+									<div class="col-12 mt-4">
+										<input type="checkbox" id="on-off-switch-bbcxcasa" name="switch1">
+									</div>
+									<div class="col-12 mt-4">
+										<input type="checkbox" id="on-off-switch-auto-bbcxcasa" name="switch2">
+									</div>
+									<canvas id="cvs" width="700" height="300">
+									    [No canvas support]
+									</canvas>
+								</div>
+                        	</div>
+						</div>
+					</div>
+				</div>
+	        	
+	        	<a href="#DD02" data-toggle="collapse" aria-expanded="false" aria-controls="DD02" class="collapsed btn btn-success col-md-12 mt-4">
+		        	Piscina
+	        		<i class="fa fa-chevron-down"></i>
+	        	</a>
+		        
+				<div class="collapse" id="DD02" aria-expanded="false" style="height: 0px;">
+		            <div class="list-box">
+		                <div class="row">
+		                    <div class="col-md-12">
+			                    <div class="row">
+									<div class="col-12 mt-4">
+										<input type="checkbox" id="on-off-switch-bbPiscina" name="switch3">
+									</div>
+									<div class="col-12 mt-4">
+										<input type="checkbox" id="on-off-switch-luzPsicina" name="switch4">
+									</div>
+								</div>
+                        	</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-12 justify-center">
-				<div id="gaugeCxCisterna"></div>
-			</div>
-			<div class="col-12 justify-center">
-				<div id="gaugeCxCisternalabel"></div>
-			</div>
-		</div>
+		
+		
 	</div>
 	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+	<script src="../js/bibliotecas/RGraph.common.core.js"></script>
+	<script src="../js/bibliotecas/RGraph.line.js"></script>
+	<script src="../js/bibliotecas/gauge/gauge.js"> </script>
 	<script src="../js/bibliotecas/jquery-3.4.0.min.js"></script>
+	<script src="../js/bibliotecas/jquery.gauge.js"></script>
 	<script src="../js/bibliotecas/jquery.dynameter.js"></script>
 	<script src="../js/bibliotecas/bootstrap.bundle.min.js"></script>
 	<script src="../js/bibliotecas/on-off-switch.js"></script>

@@ -1,7 +1,7 @@
 package com.itaipuacu.controller;
 
 import com.itaipuacu.controller.SesonsoresNivelController;
-import com.itaipuacu.service.SensorNivelService;
+import com.itaipuacu.service.SensorNivelCxCasaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,12 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class SesonsoresNivelController {
 	@Autowired
-	SensorNivelService sensorNivelService;
+	SensorNivelCxCasaService sensorNivelService;
 
 	@RequestMapping({ "/cxCasa/{nivel}" })
-	public ResponseEntity<Object> setNivelCxCasa(@PathVariable("nivel") int nivel) {
-		this.sensorNivelService.setNivelCxCasa(nivel);
-		return null;
+	public ResponseEntity<Object> setNivelCxCasa(@PathVariable("nivel") Double nivel) {
+		return this.sensorNivelService.setNivelCxCasa(nivel);
 	}
 
 	@RequestMapping({ "/getNivelCxCasa" })

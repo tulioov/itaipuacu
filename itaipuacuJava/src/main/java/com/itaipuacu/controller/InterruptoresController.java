@@ -14,24 +14,24 @@ public class InterruptoresController {
 	@Autowired
 	BotaoService botaoService;
 	
-	@RequestMapping("/ligaDesliga/{status}")
+	@RequestMapping("/ligaDesligaBBCasa/{status}")
 	public ResponseEntity<Object> ligarOuDesligarInterruptor(@PathVariable("status") String status){
-        return botaoService.ligaDesliga(status);
+        return botaoService.ligaDesliga("ligaDesligaBBCasa",status);
 	}
 	
-	@RequestMapping("/ligaDesligaAuto/{status}")
+	@RequestMapping("/ligaDesligaAutoBBCasa/{status}")
 	public ResponseEntity<Object> ligarOuDesligarInterruptorAuto(@PathVariable("status") String status){
-        return botaoService.ligaDesligaAuto(status);
+		return botaoService.ligaDesliga("ligaDesligaAutoBBCasa",status);
 	}
 	
 	@RequestMapping("/botaoBombaCasa")
 	public ResponseEntity<Object> botaoBombaCasa() {
-		return botaoService.statusBombaCasa();
+		return botaoService.statusInterruptor("botaoBombaCasa");
 	}
 	
 	@RequestMapping("/botaoBombaCasaAuto")
 	public ResponseEntity<Object> botaoBombaCasaAuto() {
-		return botaoService.statusBombaCasaAuto();
+		return botaoService.statusInterruptor("botaoBombaCasaAuto");
 	}
 	
 }

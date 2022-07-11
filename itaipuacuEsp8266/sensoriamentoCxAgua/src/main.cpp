@@ -1,24 +1,23 @@
 #include <Arduino.h>
 #include <esp8266wifi.h>
 #include <ESP8266HTTPClient.h>
+#include <HCSR04.h>
 
 const char *SSID = "SystemCall";
 const char *PASSWORD = "SAV1949sav";
+const byte triggerPin = 2;
+const byte echoPin = 0;
 
-const int trigP = 2; //D4 Or GPIO-2 of nodemcu
-const int echoP = 0; //D3 Or GPIO-0 of nodemcu
-
-long duration;
-int distance;
-
-String BASE_URL = "http://192.168.100.143:8080/";
+boolean isConectado = false;
+String BASE_URL = "http://192.168.100.143:8080";
+// String BASE_URL = "http://192.168.100.121:8080";
 
 WiFiClient client;
 HTTPClient http;
 
 String httpRequest(String path)
 {
-  http.begin(BASE_URL + path);
+  http.begin(client, BASE_URL + path);
   int httpCode = http.POST(path);
 
   if (httpCode < 0)
@@ -52,34 +51,34 @@ void initWiFi()
   Serial.println();
   Serial.print("Conectado na Rede " + String(SSID) + " | IP => ");
   Serial.println(WiFi.localIP());
+  isConectado = true;
+}
+
+void medirDistancia()
+{
+  UltraSonicDistanceSensor distanceSensor(triggerPin, echoPin);
+  double distance = distanceSensor.measureDistanceCm();
+  httpRequest("/cxCasa/" + String(distance));
 }
 
 // ############## SETUP ################# //
 
 void setup()
 {
+  pinMode(triggerPin, OUTPUT);
+  pinMode(echoPin, OUTPUT);
+  digitalWrite(triggerPin, LOW);
+  digitalWrite(echoPin, LOW);
   Serial.begin(9600);
-  pinMode(trigP, OUTPUT); // Sets the trigPin as an Output
-  pinMode(echoP, INPUT);  // Sets the echoPin as an Input
   initWiFi();
 }
 
 // ############### LOOP ################# //
-
 void loop()
 {
-
-  digitalWrite(trigP, LOW); // Makes trigPin low
-  delayMicroseconds(2);     // 2 micro second delay
-
-  digitalWrite(trigP, HIGH); // tigPin high
-  delayMicroseconds(10);     // trigPin high for 10 micro seconds
-  digitalWrite(trigP, LOW);  // trigPin low
-  
-  duration = pulseIn(echoP, HIGH); //Read echo pin, time in microseconds
-  distance = duration * 0.034 / 2; //Calculating actual/real distance
-
-  Serial.print("Distance = "); //Output distance on arduino serial monitor
-  Serial.println(distance);
-  delay(3000); //Pause for 3 seconds and start measuring distance again
+  if (isConectado)
+  {
+    medirDistancia();
+  }
+  delay(1000);
 }

@@ -1,17 +1,19 @@
 #include <Arduino.h>
 #include <esp8266wifi.h>
 #include <ESP8266HTTPClient.h>
+#include <HCSR04.h>
 
 const char *SSID = "SystemCall";
 const char *PASSWORD = "SAV1949sav";
+const byte triggerPin = D1; // ultrasom
+const byte echoPin = D2;    // ultrasom
 
-const int trigP = 2; //D4 Or GPIO-2 of nodemcu
-const int echoP = 0; //D3 Or GPIO-0 of nodemcu
+const int bbPiscina = D5;
+const int luzPiscina = D6;
 
-long duration;
-int distance;
-
-String BASE_URL = "http://192.168.100.143:8080/";
+boolean isConectado = false;
+// String BASE_URL = "http://192.168.0.143:8080/";
+String BASE_URL = "http://192.168.100.121:8080";
 
 WiFiClient client;
 HTTPClient http;
@@ -37,6 +39,28 @@ String httpRequest(String path)
   return response;
 }
 
+void enviandoSinalUltrassom()
+{
+  UltraSonicDistanceSensor distanceSensor(triggerPin, echoPin);
+  double distance = distanceSensor.measureDistanceCm();
+  Serial.println("distance: " + String(distance));
+  httpRequest("/cxCisterna/" + String(distance));
+}
+void verificandoInterruptor(String path, int porta)
+{
+
+  if (httpRequest(path) == "1")
+  {
+    Serial.println("ligando");
+    digitalWrite(porta, LOW);
+  }
+  else
+  {
+    Serial.println("desligando");
+    digitalWrite(porta, HIGH);
+  }
+}
+
 void initWiFi()
 {
 
@@ -49,37 +73,37 @@ void initWiFi()
     delay(100);
     Serial.print(".");
   }
-  Serial.println();
-  Serial.print("Conectado na Rede " + String(SSID) + " | IP => ");
+  Serial.println("Conectado na Rede " + String(SSID) + " | IP => ");
   Serial.println(WiFi.localIP());
+  isConectado = true;
 }
 
-// ############## SETUP ################# //
+// // ############## SETUP ################# //
 
 void setup()
 {
-  pinMode(trigP, OUTPUT); // Sets the trigPin as an Output
-  pinMode(echoP, INPUT);  // Sets the echoPin as an Input
-  initWiFi();
+  pinMode(triggerPin, OUTPUT);
+  pinMode(echoPin, OUTPUT);
+  digitalWrite(triggerPin, LOW);
+  digitalWrite(echoPin, LOW);
+
+  pinMode(bbPiscina, OUTPUT);
+  pinMode(luzPiscina, OUTPUT);
+  digitalWrite(bbPiscina, HIGH);
+  digitalWrite(luzPiscina, HIGH);
+
   Serial.begin(9600);
+  initWiFi();
 }
 
 // ############### LOOP ################# //
-
 void loop()
 {
-
-  digitalWrite(trigP, LOW); // Makes trigPin low
-  delayMicroseconds(2);     // 2 micro second delay
-
-  digitalWrite(trigP, HIGH); // tigPin high
-  delayMicroseconds(10);     // trigPin high for 10 micro seconds
-  digitalWrite(trigP, LOW);  // trigPin low
-  
-  duration = pulseIn(echoP, HIGH); //Read echo pin, time in microseconds
-  distance = duration * 0.034 / 2; //Calculating actual/real distance
-
-  Serial.print("Distance = "); //Output distance on arduino serial monitor
-  Serial.println(distance);
-  delay(3000); //Pause for 3 seconds and start measuring distance again
+  if (isConectado)
+  {
+    enviandoSinalUltrassom();
+    verificandoInterruptor("/botaoBombaPiscina/", bbPiscina);
+    verificandoInterruptor("/botaoLuzPiscina/", luzPiscina);
+  }
+  delay(1000);
 }
