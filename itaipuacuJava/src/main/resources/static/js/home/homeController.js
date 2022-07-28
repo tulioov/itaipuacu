@@ -26,27 +26,27 @@ const HomeController = {
 		);
 		
 		gaugeCxCisterna = Gauge(
-				document.getElementById("gaugeCxCisternaId"),
-					{
-						min: 0,
-						max: 100,
-						dialStartAngle: 180,
-						dialEndAngle: 0,
-						value: 50,
-						viewBox:"-7 0 100 60",
-						color: function(value) {
-							if(value < 20) {
-				            	return "#ef4655";
-				            }else if(value < 40) {
-				            	return "#f7aa38";
-				            }else if(value < 60) {
-				            	return "#fffa50";
-				            }else {
-				            	return "#5ee432";
-				            }
-					}
-		        }
-			);
+			document.getElementById("gaugeCxCisternaId"),
+				{
+					min: 0,
+					max: 100,
+					dialStartAngle: 180,
+					dialEndAngle: 0,
+					value: 50,
+					viewBox:"-7 0 100 60",
+					color: function(value) {
+						if(value < 20) {
+			            	return "#ef4655";
+			            }else if(value < 40) {
+			            	return "#f7aa38";
+			            }else if(value < 60) {
+			            	return "#fffa50";
+			            }else {
+			            	return "#5ee432";
+			            }
+				}
+	        }
+		);
 
 		
 		$(interruptores).each(function(index, interruptor) {
@@ -58,10 +58,10 @@ const HomeController = {
 			    trackColorOff:'#666',
 			    trackBorderColor:'#555',
 			    textColorOff:'#fff',
-			    textOn:interruptor.nome+' ON',
-			    textOff:interruptor.nome+' OFF',
+			    textOn:interruptor.nome,
+			    textOff:interruptor.nome,
 			    listener:function(name, checked){
-			    	HomeController.ligarDesligar(interruptor);
+			    	HomeController.ligarDesligar(interruptor,checked);
 		        }
 			});
 		});
@@ -131,7 +131,7 @@ $(document).ready(function(){
 		{
 			"id": "auto-bbcxcasa",
 			"nome": "BB AUTO",
-			"color" : "#00FF00",
+			"color" : "#007bff",
 			"urlLigaDesliga":"ligaDesligaAutoBBCasa/",
 		    "urlVerificaStatus":"botaoBombaCasaAuto/"
 		},

@@ -1,15 +1,15 @@
 package com.itaipuacu.controller;
 
-import com.itaipuacu.controller.SesonsoresNivelController;
-import com.itaipuacu.service.SensorNivelCxCasaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.itaipuacu.service.SensorNivelCxCasaService;
+
 @Controller
-public class SesonsoresNivelController {
+public class SensoresNivelController {
 	@Autowired
 	SensorNivelCxCasaService sensorNivelService;
 
