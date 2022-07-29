@@ -10,28 +10,19 @@ import com.itaipuacu.service.BotaoService;
 
 @Controller
 public class InterruptoresController {
-	
+
 	@Autowired
 	BotaoService botaoService;
-	
-	@RequestMapping("/ligaDesligaBBCasa/{status}")
-	public ResponseEntity<Object> ligarOuDesligarInterruptor(@PathVariable("status") String status){
-        return botaoService.ligaDesliga("ligaDesligaBBCasa",status);
+
+	@RequestMapping("/{botaoId}/{status}")
+	public ResponseEntity<Object> ligarOuDesligarInterruptor(@PathVariable("botaoId") String botaoId,
+			@PathVariable("status") String status) {
+		return botaoService.ligaDesliga(botaoId, status);
+
 	}
-	
-	@RequestMapping("/ligaDesligaAutoBBCasa/{status}")
-	public ResponseEntity<Object> ligarOuDesligarInterruptorAuto(@PathVariable("status") String status){
-		return botaoService.ligaDesliga("ligaDesligaAutoBBCasa",status);
+
+	@RequestMapping("/{botaoId}")
+	public ResponseEntity<Object> botaoBombaCasa(@PathVariable("botaoId") String botaoId) {
+		return botaoService.statusInterruptor(botaoId);
 	}
-	
-	@RequestMapping("/botaoBombaCasa")
-	public ResponseEntity<Object> botaoBombaCasa() {
-		return botaoService.statusInterruptor("botaoBombaCasa");
-	}
-	
-	@RequestMapping("/botaoBombaCasaAuto")
-	public ResponseEntity<Object> botaoBombaCasaAuto() {
-		return botaoService.statusInterruptor("botaoBombaCasaAuto");
-	}
-	
 }

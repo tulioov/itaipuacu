@@ -26,7 +26,7 @@ public class SensorNivelCxCasaService {
 			contRuido++;
 			if(contRuido == 2){
 				contRuido = 0;
-				this.btnService.ligaDesliga("ligaDesligaBBCasa","1");
+				this.btnService.ligaDesliga("ligaDesligaBBCasa","0");
 			}
 		}
 	}

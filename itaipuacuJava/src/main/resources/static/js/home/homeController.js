@@ -86,7 +86,7 @@ const HomeController = {
 		
 		$(interruptores).each(function(index, interruptor) {
 			$.ajax({
-				url: window.location.href + "/"+interruptor.urlVerificaStatus,
+				url: window.location.href + interruptor.urlVerificaStatus,
 				type : 'get'
 			})
 			.done(function(data){
@@ -126,14 +126,14 @@ $(document).ready(function(){
 		    "nome": "BB CASA",
 		    "color" : "#F57C00",
 		    "urlLigaDesliga":"ligaDesligaBBCasa/",
-		    "urlVerificaStatus":"botaoBombaCasa/"
+		    "urlVerificaStatus":"/botaoBombaCasa/"
 		},
 		{
 			"id": "auto-bbcxcasa",
 			"nome": "BB AUTO",
 			"color" : "#007bff",
 			"urlLigaDesliga":"ligaDesligaAutoBBCasa/",
-		    "urlVerificaStatus":"botaoBombaCasaAuto/"
+		    "urlVerificaStatus":"/botaoBombaCasaAuto/"
 		},
 		{
 			"id": "bbPiscina",
@@ -150,114 +150,46 @@ $(document).ready(function(){
 		    "urlVerificaStatus":""
 		}
 	];
+	HomeController.init(interruptores);
+	HomeController.getStatus(interruptores);
 	
 	setInterval(function(){ 
 		HomeController.getStatus(interruptores);
-	}, 5000);
-	HomeController.getStatus(interruptores);
+	}, 3000);
 	
-	HomeController.init(interruptores);
 	
-    data = [
-        [8,6,3,5,12,8,5,4,6,12],
-        [4,8,6,3,5,2,4,8,5,2],
-        [8,6,3,5,9,4,5,8,4,6]
-    ];
+    data1 = [0,10,20,30,40,50,60,70,80,100];
+    data2 = [100,90,80,70,60,40,60,70,80,100];
     
-    colorsFill = [
-        'Gradient(rgba(96,0,0,0.5):red:red:red:red)',
-        'Gradient(rgba(0,96,0,0.5):#0f0:#0f0:#0f0)',
-        'Gradient(rgba(0,0,96,0.5):rgba(0,0,96,0.5):blue:blue:blue)'
-    ];
-
-    frms = 20;
-    l1 = new RGraph.Line({
-        id: 'cvs',
-        data: data,
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line',
         options: {
-            textColor: '#fff',
-            tickmarksStyle: null,
-            shadow: false,
-            linewidth: 0.001,
-            colorsBackground: 'black',
-            backgroundGridVlines: false,
-            backgroundGridColor: '#666',
-            backgroundGridBorder: false,
-            xaxis: false,
-            yaxis: false,
-            spline: true,
-            filled: true,
-            
-            filledColors: [colorsFill[0],'transparent','transparent'],
-
-            yaxisScaleMax: 35,
-            xaxisLabels:['8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm'],
-            textSize: 12,
-            marginTop: 15,
-            marginBottom: 15,
-            marginLeft: 40,
-            marginRight: 15
+            responsive: true,
+            plugins: {
+            		legend: {
+            			position: 'top',
+        		},
+              		title: {
+              		display: true,
+              		text: 'Chart.js Line Chart'
+          		}
+            }
+        },
+        data: {
+        	  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        	  datasets: [{
+        		  label: 'Dataset 1',
+        	      data: data1,
+        	      borderColor: '#DC143C' ,
+        	  },
+        	  {
+        	      label: 'Dataset 2',
+        	      data: data2,
+        	      borderColor: '#0000FF',
+        	  }]
         }
-    }).trace({frames: frms}, drawChart2);
-
-    function drawChart2 ()
-    {
-        l2 = new RGraph.Line({
-            id: 'cvs',
-            data: data,
-            options: {
-                tickmarksStyle: false,
-                shadow: false,
-                linewidth: 0.001,
-                backgroundGrid: false,
-                xaxis: false,
-                yaxis: false,
-                
-                filledColors: ['transparent', colorsFill[1], 'transparent'],
-                
-                spline: true,
-                filled: true,
-                yaxisScaleMax: 35,
-                marginTop: 15,
-                marginBottom: 15,
-                marginLeft: 40,
-                marginRight: 15
-            }
-        }).trace({frames: frms}, drawChart3);
-    }
-
-    function drawChart3 ()
-    {
-        l3 = new RGraph.Line({
-            id: 'cvs',
-            data: data,
-            options: {
-                tickmarksStyle: false,
-                shadow: false,
-                linewidth: 0.001,
-                backgroundGrid: false,
-                xaxis: false,
-                yaxis: false,
-                filledColors: ['transparent', 'transparent', colorsFill[2]],
-                
-                spline: true,
-                filled: true,
-                yaxisScaleMax: 35,
-                marginTop: 15,
-                marginBottom: 15,
-                marginLeft: 40,
-                marginRight: 15
-            }
-        }).trace({frames: frms});
-    }
-
-    setTimeout(function ()
-    {
-        l1.responsive([
-            {maxWidth:null,width: 600,height:250,css: {'float': 'right'},callback: function (){l1.properties.colors = RGraph.arrayClone(l1.original_colors);l2.properties.colors = RGraph.arrayClone(l2.original_colors);l3.properties.colors = RGraph.arrayClone(l3.original_colors);RGraph.redraw();}},
-            {maxWidth:500, width: 400,height:150,css: {'float': 'none'},callback: function () {l1.properties.colors = RGraph.arrayClone(l1.original_colors);l2.properties.colors = RGraph.arrayClone(l2.original_colors);l3.properties.colors = RGraph.arrayClone(l3.original_colors);RGraph.redraw();}}
-        ]);
-    }, 1500)
+    });
 });
 
 
