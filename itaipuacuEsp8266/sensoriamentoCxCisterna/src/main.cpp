@@ -12,8 +12,8 @@ const int bbPiscina = D5;
 const int luzPiscina = D6;
 
 boolean isConectado = false;
-// String BASE_URL = "http://192.168.0.143:8080/";
-String BASE_URL = "http://192.168.100.121:8080";
+String BASE_URL = "http://192.168.100.143:8080/";
+// String BASE_URL = "http://192.168.100.121:8080";
 
 WiFiClient client;
 HTTPClient http;

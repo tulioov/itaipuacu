@@ -24,7 +24,7 @@ public class SensoresNivelController {
 	}
 
 	@RequestMapping({ "/cxCisterna/{nivel}" })
-	public ResponseEntity<Object> setNivelCxCisterna(@PathVariable("nivel") int nivel) {
+	public ResponseEntity<Object> setNivelCxCisterna(@PathVariable("nivel") Double nivel) {
 		this.sensorNivelService.setNivelCxCisterna(nivel);
 		return null;
 	}

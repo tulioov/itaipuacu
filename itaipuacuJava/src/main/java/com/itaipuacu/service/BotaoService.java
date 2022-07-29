@@ -12,11 +12,19 @@ public class BotaoService {
 	public ResponseEntity<Object> statusInterruptor(String urlInterruptor) {
 
 		if ("botaoBombaCasa".equals(urlInterruptor)) {
-			return new ResponseEntity<>(Interruptor.botao.toString(), HttpStatus.OK);
+			return new ResponseEntity<>(Interruptor.botaoBBCasa.toString(), HttpStatus.OK);
 		}
 
 		if ("botaoBombaCasaAuto".equals(urlInterruptor)) {
-			return new ResponseEntity<>(Interruptor.botaoAuto.toString(), HttpStatus.OK);
+			return new ResponseEntity<>(Interruptor.botaoBBCasaAuto.toString(), HttpStatus.OK);
+		}
+		
+		if ("botaoBombaPiscina".equals(urlInterruptor)) {
+			return new ResponseEntity<>(Interruptor.botaoBombaPiscina.toString(), HttpStatus.OK);
+		}
+		
+		if ("botaoLuzPiscina".equals(urlInterruptor)) {
+			return new ResponseEntity<>(Interruptor.botaoLuzPiscina.toString(), HttpStatus.OK);
 		}
 		
 		return null;
@@ -27,19 +35,35 @@ public class BotaoService {
 
 			if ("ligaDesligaBBCasa".equals(acao)) {
 
-				Interruptor.botao = Integer.valueOf(Integer.parseInt(status));
+				Interruptor.botaoBBCasa = Integer.valueOf(Integer.parseInt(status));
 
-				if (Interruptor.botao.intValue() == 1) {
+				if (Interruptor.botaoBBCasa.intValue() == 1) {
 					return new ResponseEntity<>("ON", HttpStatus.OK);
 				}
 				return new ResponseEntity<>("OFF", HttpStatus.OK);
 
 			}
 
-			if ("ligaDesligaAutoBBCasa".endsWith(acao)) {
-				Interruptor.botaoAuto = Integer.valueOf(Integer.parseInt(status));
+			if ("ligaDesligaAutoBBCasa".equals(acao)) {
+				Interruptor.botaoBBCasaAuto = Integer.valueOf(Integer.parseInt(status));
 
-				if (Interruptor.botaoAuto.intValue() == 1) {
+				if (Interruptor.botaoBBCasaAuto.intValue() == 1) {
+					return new ResponseEntity<>("ON", HttpStatus.OK);
+				}
+				return new ResponseEntity<>("OFF", HttpStatus.OK);
+			}
+			if ("ligaDesligaBombaPiscina".equals(acao)) {
+				Interruptor.botaoBombaPiscina = Integer.valueOf(Integer.parseInt(status));
+
+				if (Interruptor.botaoBombaPiscina.intValue() == 1) {
+					return new ResponseEntity<>("ON", HttpStatus.OK);
+				}
+				return new ResponseEntity<>("OFF", HttpStatus.OK);
+			}
+			if ("ligaDesligaLuzPiscina".equals(acao)) {
+				Interruptor.botaoLuzPiscina = Integer.valueOf(Integer.parseInt(status));
+
+				if (Interruptor.botaoLuzPiscina.intValue() == 1) {
 					return new ResponseEntity<>("ON", HttpStatus.OK);
 				}
 				return new ResponseEntity<>("OFF", HttpStatus.OK);

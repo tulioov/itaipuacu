@@ -18,11 +18,11 @@ public class SensorNivelCxCasaService {
 	
 	public void automatico(int nivel){
 		
-		if(Interruptor.botaoAuto == 1 && nivel < 20 && this.btnService.statusInterruptor("botaoBombaCasa").getBody().equals("0")){
+		if(Interruptor.botaoBBCasaAuto == 1 && nivel < 20 && this.btnService.statusInterruptor("botaoBombaCasa").getBody().equals("0")){
 			this.btnService.ligaDesliga("ligaDesligaBBCasa","1");
 		}
 		
-		if (Interruptor.botaoAuto == 1 && nivel >= 95 && this.btnService.statusInterruptor("botaoBombaCasa").getBody().equals("1")) {
+		if (Interruptor.botaoBBCasaAuto == 1 && nivel >= 95 && this.btnService.statusInterruptor("botaoBombaCasa").getBody().equals("1")) {
 			contRuido++;
 			if(contRuido == 2){
 				contRuido = 0;
@@ -49,8 +49,12 @@ public class SensorNivelCxCasaService {
 		return new ResponseEntity<>(Integer.valueOf(SensorCx.nivelAguaCasa), HttpStatus.OK);
 	}
 
-	public ResponseEntity<Object> setNivelCxCisterna(int nivel) {
+	public ResponseEntity<Object> setNivelCxCisterna(double nivelD) {
+		
+		int nivel = (int)nivelD;
+		
 		SensorCx.nivelAguaCisterna = nivel;
+		System.out.println("nivel cisternar: "+nivel);
 		return new ResponseEntity<>("OK", HttpStatus.OK);
 	}
 

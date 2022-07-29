@@ -139,15 +139,15 @@ $(document).ready(function(){
 			"id": "bbPiscina",
 			"nome": "BB Piscina",
 			"color" : "#F57C00",
-			"url":"",
-		    "urlVerificaStatus":""
+			"urlLigaDesliga":"ligaDesligaBombaPiscina/",
+		    "urlVerificaStatus":"/botaoBombaPiscina/"
 		},
 		{
 			"id": "luzPsicina",
 			"nome": "Luz Piscina",
 			"color" : "#F57C00",
-			"url":"",
-		    "urlVerificaStatus":""
+			"urlLigaDesliga":"ligaDesligaLuzPiscina/",
+		    "urlVerificaStatus":"/botaoLuzPiscina/"
 		}
 	];
 	HomeController.init(interruptores);
@@ -155,7 +155,7 @@ $(document).ready(function(){
 	
 	setInterval(function(){ 
 		HomeController.getStatus(interruptores);
-	}, 3000);
+	}, 2000);
 	
 	
     data1 = [0,10,20,30,40,50,60,70,80,100];
