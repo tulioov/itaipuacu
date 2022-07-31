@@ -37,7 +37,7 @@ public class SensorNivelCxCasaService {
 		
 		nivel = 48 - nivel;
 		nivel = nivel * 100 / 28;
-		SensorCx.nivelAguaCasa = nivel;
+		SensorCx.setNivelAguaCasa(nivel);
 		
 		automatico(nivel);
 
@@ -46,19 +46,23 @@ public class SensorNivelCxCasaService {
 
 	public ResponseEntity<Object> getNivelCxCasa() {
 		
-		return new ResponseEntity<>(Integer.valueOf(SensorCx.nivelAguaCasa), HttpStatus.OK);
+		return new ResponseEntity<>(Integer.valueOf(SensorCx.getNivelAguaCasa()), HttpStatus.OK);
 	}
 
 	public ResponseEntity<Object> setNivelCxCisterna(double nivelD) {
 		
 		int nivel = (int)nivelD;
 		
-		SensorCx.nivelAguaCisterna = nivel;
+		SensorCx.setNivelAguaCisterna(nivel);  ;
 		System.out.println("nivel cisternar: "+nivel);
 		return new ResponseEntity<>("OK", HttpStatus.OK);
 	}
 
 	public ResponseEntity<Object> getNivelCxCisterna() {
-		return new ResponseEntity<>(Integer.valueOf(SensorCx.nivelAguaCisterna), HttpStatus.OK);
+		return new ResponseEntity<>(Integer.valueOf(SensorCx.getNivelAguaCisterna()), HttpStatus.OK);
+	}
+
+	public ResponseEntity<Object> getGraph() {
+		return new ResponseEntity<>(SensorCx.getSng(), HttpStatus.OK);
 	}
 }

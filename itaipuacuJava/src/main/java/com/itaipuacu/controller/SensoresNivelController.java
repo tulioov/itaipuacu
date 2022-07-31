@@ -17,20 +17,27 @@ public class SensoresNivelController {
 	public ResponseEntity<Object> setNivelCxCasa(@PathVariable("nivel") Double nivel) {
 		return this.sensorNivelService.setNivelCxCasa(nivel);
 	}
-
-	@RequestMapping({ "/getNivelCxCasa" })
-	public ResponseEntity<Object> getNivelCxCasa() {
-		return this.sensorNivelService.getNivelCxCasa();
-	}
-
+	
 	@RequestMapping({ "/cxCisterna/{nivel}" })
 	public ResponseEntity<Object> setNivelCxCisterna(@PathVariable("nivel") Double nivel) {
 		this.sensorNivelService.setNivelCxCisterna(nivel);
 		return null;
 	}
 
+	@RequestMapping({ "/getNivelCxCasa" })
+	public ResponseEntity<Object> getNivelCxCasa() {
+		return this.sensorNivelService.getNivelCxCasa();
+	}
+	
 	@RequestMapping({ "/getNivelCxCisterna" })
 	public ResponseEntity<Object> getNivelCxCisterna() {
 		return this.sensorNivelService.getNivelCxCisterna();
 	}
+	
+	@RequestMapping({ "/getGraph" })
+	public ResponseEntity<Object> getGraph() {
+		return this.sensorNivelService.getGraph();
+	}
+	
+	
 }

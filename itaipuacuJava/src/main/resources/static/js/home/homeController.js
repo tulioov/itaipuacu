@@ -81,7 +81,7 @@ const HomeController = {
 		})
 	},
 	
-	getStatus(interruptores){
+	getStatus(interruptores, myChart){
 		
 		
 		$(interruptores).each(function(index, interruptor) {
@@ -115,6 +115,44 @@ const HomeController = {
 			$("#gaugeCxCisternalabel").html(data);
 		})
 		
+		$.ajax({
+			url: window.location.href + "/getGraph",
+			type : 'get'
+		}).done(function(data){
+			
+			data1 = data.lstDadosCxAgua;
+			data2 = data.lstDadosCisterna;
+			
+			const ctx = document.getElementById('myChart').getContext('2d');
+			const myChart = new Chart(ctx, {
+		        type: 'line',
+		        options: {
+		            responsive: true,
+		            plugins: {
+		            		legend: {
+		            			position: 'top',
+		        		},
+		              		title: {
+		              		display: true,
+		              		text: 'Chart.js Line Chart'
+		          		}
+		            }
+		        },
+		        data: {
+		        	  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+		        	  datasets: [{
+		        		  label: 'Cx D"agua',
+		        	      data: data1,
+		        	      borderColor: '#DC143C' ,
+		        	  },
+		        	  {
+		        	      label: 'Cisterna',
+		        	      data: data2,
+		        	      borderColor: '#0000FF',
+		        	  }]
+		        }
+		    });
+		})
 	}
 }
 
@@ -150,46 +188,14 @@ $(document).ready(function(){
 		    "urlVerificaStatus":"/botaoLuzPiscina/"
 		}
 	];
-	HomeController.init(interruptores);
-	HomeController.getStatus(interruptores);
+	
+    
+    HomeController.init(interruptores);
+    HomeController.getStatus(interruptores);
 	
 	setInterval(function(){ 
 		HomeController.getStatus(interruptores);
 	}, 2000);
-	
-	
-    data1 = [0,10,20,30,40,50,60,70,80,100];
-    data2 = [100,90,80,70,60,40,60,70,80,100];
-    
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const myChart = new Chart(ctx, {
-        type: 'line',
-        options: {
-            responsive: true,
-            plugins: {
-            		legend: {
-            			position: 'top',
-        		},
-              		title: {
-              		display: true,
-              		text: 'Chart.js Line Chart'
-          		}
-            }
-        },
-        data: {
-        	  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        	  datasets: [{
-        		  label: 'Dataset 1',
-        	      data: data1,
-        	      borderColor: '#DC143C' ,
-        	  },
-        	  {
-        	      label: 'Dataset 2',
-        	      data: data2,
-        	      borderColor: '#0000FF',
-        	  }]
-        }
-    });
 });
 
 
