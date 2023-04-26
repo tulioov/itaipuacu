@@ -11,7 +11,7 @@
 	<groupId>com.itaipuacu</groupId>
 	<artifactId>itaipuacu2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>itaipuacu2</name>
+	<name>itaipuacu</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

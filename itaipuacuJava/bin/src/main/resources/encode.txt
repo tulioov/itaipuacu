@@ -1,0 +1,40 @@
+JS
+á = \u00e1       Ï = \u00cf
+à = \u00e0       ó = \u00f3
+â = \u00e2       ò = \u00f2
+ã = \u00e3       ô = \u00f4
+ä = \u00e4       õ = \u00f5
+Á = \u00c1       ö = \u00f6
+À = \u00c0       Ó = \u00d3
+Â = \u00c2       Ò = \u00d2
+Ã = \u00c3       Ô = \u00d4
+Ä = \u00c4       Õ = \u00d5
+é = \u00e9       Ö = \u00d6
+è = \u00e8       ú = \u00fa
+ê = \u00ea       ù = \u00f9
+É = \u00c9       û = \u00fb
+È = \u00c8       ü = \u00fc
+Ê = \u00ca       Ú = \u00da
+Ë = \u00cb       Ù = \u00d9
+í = \u00ed       Û = \u00db
+ì = \u00ec       ç = \u00e7
+î = \u00ee       Ç = \u00c7
+ï = \u00ef       ñ = \u00f1
+Í = \u00cd       Ñ = \u00d1
+Ì = \u00cc       & = \u0026
+Î = \u00ce       ' = \u0027
+çã = \u00e7\u00e3
+HTML/JAVA 
+á	&aacute;	Á	&Aacute;
+ã	&atilde;	Ã	&Atilde;
+â	&acirc;		Â	&Acirc;
+à	&agrave;	À	&Agrave;
+é	&eacute;	É	&Eacute;
+ê	&ecirc;		Ê	&Ecirc;
+í	&iacute;	Í	&Iacute;
+ó	&oacute;	Ó	&Oacute;
+õ	&otilde;	Õ	&Otilde;
+ô	&ocirc;		Ô	& Ocirc;
+ú	&uacute;	Ú	&Uacute;
+ç	&ccedil;	Ç	&Ccedil;
+çã = &ccedil;&atilde;
